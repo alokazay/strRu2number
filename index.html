@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <base id="base" href=""/>
+    <meta charset="UTF-8">
+    <meta name=description content="">
+    <meta name=viewport content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+<div class="test">
+
+</div>
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+
+
+<script>
+
+    function str2num(str) {
+        str = str.toLowerCase();
+
+        var MATRIX = {
+            'ноль': [0, 1, 0],
+            'один': [1, 1, 0],
+            'одна': [1, 1, 0],
+            'два': [2, 1, 0],
+            'две': [2, 1, 0],
+            'три': [3, 1, 0],
+            'четыре': [4, 1, 0],
+            'пять': [5, 1, 0],
+            'шесть': [6, 1, 0],
+            'семь': [7, 1, 0],
+            'восемь': [8, 1, 0],
+            'девять': [9, 1, 0],
+            'десять': [10, 1, 0],
+            'одинадцать': [11, 1, 0],
+            'двенадцать': [12, 1, 0],
+            'тринадцать': [13, 1, 0],
+            'четырнадцать': [14, 1, 0],
+            'пятнадцать': [15, 1, 0],
+            'шестнадцать': [16, 1, 0],
+            'семьнадцать': [17, 1, 0],
+            'восемьнадцать': [18, 1, 0],
+            'девятьнадцать': [19, 1, 0],
+
+            'двадцать': [20, 2, 0],
+            'тридцать': [30, 2, 0],
+            'сорок': [40, 2, 0],
+            'пятьдесят': [50, 2, 0],
+            'шестьдесят': [60, 2, 0],
+            'семьдесят': [70, 2, 0],
+            'восемьдесят': [80, 2, 0],
+            'девеносто': [90, 2, 0],
+
+            'сто': [100, 3, 0],
+            'двести': [200, 3, 0],
+            'триста': [300, 3, 0],
+            'четыреста': [400, 3, 0],
+            'пятьсот': [500, 3, 0],
+            'шестьсот': [600, 3, 0],
+            'семьсот': [700, 3, 0],
+            'восемьсот': [800, 3, 0],
+            'девятьсот': [900, 3, 0],
+
+
+            'тысяч': [1000, 4, 1],
+            'тысячи': [1000, 4, 1],
+            'тысяч': [1000, 4, 1],
+
+            'миллион': [1000000, 5, 1],
+            'миллиона': [1000000, 5, 1],
+            'миллионов': [1000000, 5, 1],
+
+            'миллиона': [1000000, 5, 1]
+        };
+
+        str = str.split(' ');
+
+        var globalLevel = 0;
+        var globalValue = 0;
+        var localLevel = 0;
+        var localValue = 0;
+
+        var i = 0;
+        str.forEach(function (one) {
+            if (MATRIX[one][2] == 1) {
+                if (MATRIX[one][1] >= globalLevel) {
+                    globalLevel = MATRIX[one][1];
+                    MATRIX[one][0] * localValue;
+                    globalValue += MATRIX[one][0] * localValue;
+                    localLevel = 0;
+                    localValue = 0;
+                } else {
+                    globalValue = globalValue + MATRIX[one][0] * localValue;
+                    localLevel = 0;
+                    localValue = 0;
+                }
+            } else {
+
+                if (localLevel != 0 && localLevel >= MATRIX[one][1]) {
+                    localLevel = MATRIX[one][1];
+                    localValue = localValue += MATRIX[one][0];
+                } else {
+                    if (localLevel == 0) {
+                        localLevel = MATRIX[one][1];
+                        localValue = MATRIX[one][0];
+                    }
+
+                }
+            }
+        });
+
+        return (globalValue + localValue);
+
+    }
+
+    $('.test').append(str2num('два миллиона двести двенадцать тысяч сто восемьдесят пять') + '<br>');
+    $('.test').append(str2num('Две тысячи') + '<br>');
+
+
+</script>
+
+</body>
+</html>
